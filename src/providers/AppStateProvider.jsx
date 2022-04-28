@@ -137,7 +137,27 @@ const AppStateProvider = ({children}) => {
   ]);
   const [orders, setOrders] = useState([]);
 
-  const addToOrder = useCallback((id) => {}, []);
+  // [{ id, quantity: 1 }]
+  const addToOrder = useCallback((id) => {
+    setOrders(orders => {
+      const found = orders.find(order => order.id === id );
+
+      if ( found === undefined ) {
+        return [...orders, {id, quantity: 1}];
+      } else {
+        return orders.map(order => {
+          if (order.id === id) {
+            return {
+              id,
+              quantity: order.quantity + 1
+            };
+          } else {
+            return order;
+          }
+        } )
+      }
+    });
+  }, []);
   const remove = useCallback((id) => {}, []);
   const removeAll = useCallback(() => {}, []);
   
