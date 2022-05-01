@@ -6,7 +6,7 @@ import usePrototypes from "../hooks/usePrototypes";
 export default function Order() {
   const orders = useOrders();
   const prototypes = usePrototypes();
-  const { remove } = useActions();
+  const { remove, removeAll } = useActions();
 
   const totalPrice = useMemo(() => {
     return orders.map(order => {
@@ -62,7 +62,11 @@ return (
         <div className="action">
           <div className="price">$ {totalPrice}</div>
         </div>
+        <button className="btn btn--link" onClick={removeAll}>
+          <i className="icon icon--delete"></i>
+        </button>
       </div>
+      <button className="btn btn--secondary" style={{ width: "100%", marginTop: 10 }}>Checkout</button>
     </div>
     </div>
   </aside>
